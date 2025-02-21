@@ -1,0 +1,6 @@
+TikTokApi==5.2.2
+requests==2.31.0
+sqlmodel==0.0.14
+psycopg2-binary==2.9.9
+apscheduler==3.10.4
+facebook-business==20.0.0
