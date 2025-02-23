@@ -1,0 +1,39 @@
+ai_agency/
+├── Dockerfile
+├── main.py
+├── requirements.txt
+├── agents/
+│   ├── analytics/
+│   │   ├── __init__.py
+│   │   └── performance_analyzer.py
+│   ├── customer_service/
+│   │   ├── __init__.py
+│   │   └── query_handler.py
+│   ├── graders/
+│   │   └── sentiment_grader.py
+│   ├── inventory_management/
+│   │   ├── __init__.py
+│   │   └── supplier_sync.py
+│   ├── marketing/
+│   │   ├── __init__.py
+│   │   ├── ad_manager.py
+│   │   └── content_generator.py
+│   ├── product_research/
+│   │   ├── __init__.py
+│   │   ├── analyzer.py
+│   │   ├── scraper.py
+│   │   └── supplier_finder.py
+│   ├── reflectors/
+│   │   └── product_reflector.py
+│   ├── sales/
+│   │   ├── __init__.py
+│   │   └── order_processor.py
+├── data/
+│   ├── logs/
+│   └── scraped_data/
+└── utils/
+    ├── __init__.py
+    ├── api_router.py
+    ├── db.py
+    ├── logger.py
+    └── sentiment_analyzer.py

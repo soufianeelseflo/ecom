@@ -4,3 +4,8 @@ sqlmodel==0.0.14
 psycopg2-binary==2.9.9
 apscheduler==3.10.4
 facebook-business==20.0.0
+easyocr==1.7.1
+transformers==4.38.2
+torch==2.2.1
+playwright==1.41.2
+diffusers==0.24.0  # For Stable Diffusion

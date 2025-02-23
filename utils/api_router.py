@@ -1,18 +1,21 @@
 import requests
 import os
+import time
+from utils.logger import logger  # Ensure logger import
 
 class APIRouter:
-    def __init__(self, api_key):
-        self.api_key = api_key
-        self.base_url = "https://openrouter.ai/api/v1"  # Official Open Router endpoint
+    def __init__(self):
+        self.api_key = os.getenv("OPEN_ROUTER_KEY")
+        self.base_url = "https://openrouter.ai/api/v1"
 
-    def generate(self, prompt, model="openai/gpt-3.5-turbo"):  # Default model
+    def generate(self, prompt, model="gemini/2.0-flash"):
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
-        payload = {"model": model, "prompt": prompt, "max_tokens": 100}
+        payload = {"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 100}
         try:
-            response = requests.post(f"{self.base_url}/completions", json=payload, headers=headers)
-            response.raise_for_status()
-            return response.json()["choices"][0]["text"].strip()
-        except requests.RequestException as e:
-            print(f"API request failed: {e}")
+            resp = requests.post(f"{self.base_url}/chat/completions", json=payload, headers=headers)
+            resp.raise_for_status()
+            return resp.json()["choices"][0]["message"]["content"].strip()
+        except Exception as e:
+            logger.error(f"API error: {e}")
+            time.sleep(60)
             return None

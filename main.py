@@ -9,24 +9,21 @@ from agents.sales.order_processor import OrderProcessor
 from agents.analytics.performance_analyzer import PerformanceAnalyzer
 from utils.api_router import APIRouter
 from utils.logger import logger
-import os
 
 def main():
-    api_router = APIRouter(os.getenv("OPEN_ROUTER_KEY"))
-    fb_access_token = os.getenv("FB_ACCESS_TOKEN")
-    tt_access_token = os.getenv("TT_ACCESS_TOKEN", "placeholder")
-
+    """Run the full AI agency autonomously."""
+    api_router = APIRouter()
     scraper = TikTokScraper()
-    analyzer = CommentAnalyzer(api_router)
-    supplier_sync = SupplierSync()
-    content_gen = ContentGenerator(api_router)
-    ad_manager = AdManager(fb_access_token, tt_access_token, content_gen)
-    query_handler = QueryHandler(api_router)
-    order_processor = OrderProcessor()
-    performance_analyzer = PerformanceAnalyzer()
+    analyzer = CommentAnalyzer()
+    supplier_sync = SupplierSync()  # Placeholder; code this if needed
+    content_gen = ContentGenerator()
+    ad_manager = AdManager(content_gen)
+    query_handler = QueryHandler(api_router)  # Placeholder; code this if needed
+    order_processor = OrderProcessor()  # Placeholder; code this if needed
+    performance_analyzer = PerformanceAnalyzer()  # Placeholder; code this if needed
 
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(scraper.scrape_trending, "cron", hour=0)  # Midnight
+    scheduler = BackgroundScheduler()  # https://apscheduler.readthedocs.io/
+    scheduler.add_job(scraper.scrape_trending, "cron", hour=0)
     scheduler.add_job(analyzer.analyze_comments, "cron", hour=1)
     scheduler.add_job(supplier_sync.sync_inventory, "cron", hour=2)
     scheduler.add_job(ad_manager.run_campaigns, "cron", hour=3)
